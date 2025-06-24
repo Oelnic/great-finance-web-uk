@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
+import { LanguageToggle } from "@/components/LanguageToggle";
 import { 
   Phone, 
   Mail, 
@@ -19,10 +21,15 @@ import {
   Instagram,
   Linkedin,
   Twitter,
-  Youtube
+  Youtube,
+  Shield,
+  Award,
+  Users,
+  TrendingUp
 } from "lucide-react";
 
 const Index = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,8 +43,8 @@ const Index = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Message Sent",
-      description: "Thank you for contacting Great Finance. We'll respond within 24 hours.",
+      title: t('messageSent'),
+      description: t('messageDesc'),
     });
     setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
@@ -45,31 +52,31 @@ const Index = () => {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Subscribed",
-      description: "You've successfully subscribed to our newsletter.",
+      title: t('subscribed'),
+      description: t('subscribedDesc'),
     });
     setNewsletterEmail("");
   };
 
   const services = [
     {
-      title: "Self-Employed Tax Returns",
-      description: "UTR registration, CIS deductions, Self Assessment, and company registration services",
+      title: t('selfEmployed'),
+      description: t('selfEmployedDesc'),
       icon: <User className="h-8 w-8 text-blue-600" />
     },
     {
-      title: "Limited Companies",
-      description: "Comprehensive bookkeeping, VAT returns, payroll management, and year-end accounting",
+      title: t('limitedCompanies'),
+      description: t('limitedCompaniesDesc'),
       icon: <Briefcase className="h-8 w-8 text-blue-600" />
     },
     {
-      title: "General Accounting",
-      description: "Affordable accounting services tailored for small and medium businesses",
+      title: t('generalAccounting'),
+      description: t('generalAccountingDesc'),
       icon: <FileText className="h-8 w-8 text-blue-600" />
     },
     {
-      title: "Self Assessment",
-      description: "For directors, property income, foreign income, and capital gains taxation",
+      title: t('selfAssessment'),
+      description: t('selfAssessmentDesc'),
       icon: <Globe className="h-8 w-8 text-blue-600" />
     }
   ];
@@ -80,75 +87,90 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <header className="bg-white/95 backdrop-blur-md shadow-lg border-b border-slate-200/60 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-blue-800">Great Finance</h1>
-              <span className="ml-2 text-sm text-gray-600 italic">"Be Great"</span>
+              <div className="flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg shadow-lg">
+                <TrendingUp className="h-6 w-6 mr-2" />
+                <h1 className="text-2xl font-bold">Great Finance</h1>
+              </div>
+              <span className="ml-3 text-sm text-slate-600 italic font-medium bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">"Be Great"</span>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="#home" className="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
-              <a href="#services" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-              <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+              <a href="#home" className="text-slate-700 hover:text-blue-600 transition-all duration-300 font-medium border-b-2 border-transparent hover:border-blue-600">{t('home')}</a>
+              <a href="#services" className="text-slate-700 hover:text-blue-600 transition-all duration-300 font-medium border-b-2 border-transparent hover:border-blue-600">{t('services')}</a>
+              <a href="#about" className="text-slate-700 hover:text-blue-600 transition-all duration-300 font-medium border-b-2 border-transparent hover:border-blue-600">{t('about')}</a>
+              <a href="#contact" className="text-slate-700 hover:text-blue-600 transition-all duration-300 font-medium border-b-2 border-transparent hover:border-blue-600">{t('contact')}</a>
             </nav>
             <div className="flex items-center space-x-4">
-              <Phone className="h-4 w-4 text-blue-600" />
-              <span className="text-sm font-medium">+44 7551 722375</span>
+              <LanguageToggle />
+              <div className="flex items-center space-x-2 bg-slate-100 px-3 py-2 rounded-lg">
+                <Phone className="h-4 w-4 text-blue-600" />
+                <span className="text-sm font-semibold text-slate-800">+44 7551 722375</span>
+              </div>
             </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="bg-gradient-to-br from-blue-50 to-green-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Professional Tax & Accounting Services
+      <section id="home" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+          <div className="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 mb-8">
+            <Shield className="h-5 w-5 text-green-400 mr-2" />
+            <span className="text-white/90 text-sm font-medium">HMRC Regulated • Professional Standards</span>
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            {t('heroTitle')}
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Personalized taxation and accounting services for British and Bulgarian clients. 
-            Expert guidance for individuals and businesses across the UK.
+          <p className="text-xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed">
+            {t('heroSubtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-              Get Free Consultation
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <Button size="lg" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+              <Award className="h-5 w-5 mr-2" />
+              {t('freeConsultation')}
             </Button>
-            <Button size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-              View Services
+            <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white hover:text-blue-900 backdrop-blur-sm bg-white/10 transition-all duration-300">
+              {t('viewServices')}
             </Button>
           </div>
-          <div className="mt-8 flex justify-center">
-            <Badge variant="secondary" className="text-sm px-4 py-2">
-              ⭐ 98% Recommendation Rate from 41 Reviews
+          <div className="flex justify-center">
+            <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 text-base shadow-lg">
+              {t('recommendation')}
             </Badge>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Services</h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Comprehensive accounting and tax services designed to help your business thrive
+      <section id="services" className="py-24 bg-white relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-20">
+            <h3 className="text-4xl font-bold text-slate-900 mb-6">{t('servicesTitle')}</h3>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-green-600 mx-auto mb-6"></div>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              {t('servicesSubtitle')}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-4">
-                    {service.icon}
+              <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-0 shadow-lg hover:-translate-y-2 bg-gradient-to-br from-white to-slate-50">
+                <CardHeader className="text-center pb-4">
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                      {service.icon}
+                    </div>
                   </div>
-                  <CardTitle className="text-lg">{service.title}</CardTitle>
+                  <CardTitle className="text-xl font-bold text-slate-900">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-center">
+                  <CardDescription className="text-center text-slate-600 leading-relaxed">
                     {service.description}
                   </CardDescription>
                 </CardContent>
@@ -159,61 +181,61 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-gray-50">
+      <section id="about" className="py-24 bg-gradient-to-br from-slate-100 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">Why Choose Great Finance?</h3>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm font-bold">✓</span>
+              <h3 className="text-4xl font-bold text-slate-900 mb-8">{t('whyChoose')}</h3>
+              <div className="space-y-8">
+                <div className="flex items-start group">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Users className="text-white h-6 w-6" />
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold text-gray-900">Bilingual Expertise</h4>
-                    <p className="text-gray-600">Fluent in English and Bulgarian, serving diverse communities</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm font-bold">✓</span>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold text-gray-900">HMRC Regulated</h4>
-                    <p className="text-gray-600">Fully compliant with UK regulations and anti-money laundering requirements</p>
+                  <div className="ml-6">
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">{t('bilingualExpertise')}</h4>
+                    <p className="text-slate-600 leading-relaxed">{t('bilingualDesc')}</p>
                   </div>
                 </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm font-bold">✓</span>
+                <div className="flex items-start group">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Shield className="text-white h-6 w-6" />
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold text-gray-900">Personalized Service</h4>
-                    <p className="text-gray-600">Tailored solutions for your unique financial needs</p>
+                  <div className="ml-6">
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">{t('hmrcRegulated')}</h4>
+                    <p className="text-slate-600 leading-relaxed">{t('hmrcDesc')}</p>
                   </div>
                 </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mt-1">
-                    <span className="text-white text-sm font-bold">✓</span>
+                <div className="flex items-start group">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Award className="text-white h-6 w-6" />
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold text-gray-900">UK-Wide Coverage</h4>
-                    <p className="text-gray-600">Serving clients across major UK cities and remote locations</p>
+                  <div className="ml-6">
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">{t('personalizedService')}</h4>
+                    <p className="text-slate-600 leading-relaxed">{t('personalizedDesc')}</p>
+                  </div>
+                </div>
+                <div className="flex items-start group">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Globe className="text-white h-6 w-6" />
+                  </div>
+                  <div className="ml-6">
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">{t('ukWideCoverage')}</h4>
+                    <p className="text-slate-600 leading-relaxed">{t('ukWideDesc')}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h4 className="text-xl font-bold text-gray-900 mb-4">Service Areas</h4>
-              <div className="grid grid-cols-2 gap-2">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 border border-slate-200">
+              <h4 className="text-2xl font-bold text-slate-900 mb-6 text-center">{t('serviceAreas')}</h4>
+              <div className="grid grid-cols-2 gap-3">
                 {locations.map((location, index) => (
-                  <Badge key={index} variant="secondary" className="text-center py-2">
+                  <Badge key={index} className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 hover:from-blue-200 hover:to-blue-300 text-center py-3 border-0 font-medium">
                     {location}
                   </Badge>
                 ))}
               </div>
-              <p className="text-sm text-gray-600 mt-4 text-center">
-                + Remote services available nationwide
+              <p className="text-sm text-slate-600 mt-6 text-center font-medium bg-gradient-to-r from-green-100 to-green-200 p-3 rounded-lg">
+                {t('remoteServices')}
               </p>
             </div>
           </div>
@@ -221,60 +243,66 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      <section id="contact" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Get In Touch</h3>
-            <p className="text-lg text-gray-600">Ready to take control of your finances? Contact us today.</p>
+          <div className="text-center mb-20">
+            <h3 className="text-4xl font-bold text-slate-900 mb-6">{t('getInTouch')}</h3>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-green-600 mx-auto mb-6"></div>
+            <p className="text-xl text-slate-600">{t('contactSubtitle')}</p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
-                <CardDescription>We'll respond within 24 hours</CardDescription>
+            <Card className="shadow-2xl border-0 bg-gradient-to-br from-white to-slate-50">
+              <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
+                <CardTitle className="text-2xl">{t('sendMessage')}</CardTitle>
+                <CardDescription className="text-blue-100">{t('respondTime')}</CardDescription>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-6">
                     <Input
-                      placeholder="Your Name"
+                      placeholder={t('yourName')}
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       required
+                      className="border-2 border-slate-200 focus:border-blue-500 h-12"
                     />
                     <Input
                       type="email"
-                      placeholder="Email Address"
+                      placeholder={t('emailAddress')}
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       required
+                      className="border-2 border-slate-200 focus:border-blue-500 h-12"
                     />
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid sm:grid-cols-2 gap-6">
                     <Input
                       type="tel"
-                      placeholder="Phone Number"
+                      placeholder={t('phoneNumber')}
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="border-2 border-slate-200 focus:border-blue-500 h-12"
                     />
                     <Input
-                      placeholder="Subject"
+                      placeholder={t('subject')}
                       value={formData.subject}
                       onChange={(e) => setFormData({...formData, subject: e.target.value})}
                       required
+                      className="border-2 border-slate-200 focus:border-blue-500 h-12"
                     />
                   </div>
                   <Textarea
-                    placeholder="Your Message"
-                    rows={5}
+                    placeholder={t('yourMessage')}
+                    rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     required
+                    className="border-2 border-slate-200 focus:border-blue-500"
                   />
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                    Send Message
+                  <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 h-12 text-lg font-semibold shadow-lg">
+                    {t('sendMessageBtn')}
                   </Button>
                 </form>
               </CardContent>
@@ -282,47 +310,56 @@ const Index = () => {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
+              <Card className="shadow-lg border-0 bg-gradient-to-br from-white to-slate-50">
+                <CardHeader className="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-t-lg">
+                  <CardTitle className="text-2xl">{t('contactInfo')}</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center">
-                    <Phone className="h-5 w-5 text-blue-600 mr-3" />
-                    <span>+44 7551 722375</span>
+                <CardContent className="p-8 space-y-6">
+                  <div className="flex items-center group">
+                    <div className="p-3 bg-blue-100 rounded-lg mr-4 group-hover:bg-blue-200 transition-colors">
+                      <Phone className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <span className="font-semibold text-slate-800">+44 7551 722375</span>
                   </div>
-                  <div className="flex items-center">
-                    <Mail className="h-5 w-5 text-blue-600 mr-3" />
-                    <span>info@greatfinance.co.uk</span>
+                  <div className="flex items-center group">
+                    <div className="p-3 bg-green-100 rounded-lg mr-4 group-hover:bg-green-200 transition-colors">
+                      <Mail className="h-6 w-6 text-green-600" />
+                    </div>
+                    <span className="font-semibold text-slate-800">info@greatfinance.co.uk</span>
                   </div>
-                  <div className="flex items-start">
-                    <MapPin className="h-5 w-5 text-blue-600 mr-3 mt-1" />
-                    <span>Notcutt House, 36 Southwark Bridge Road,<br />London SE1 9EU</span>
+                  <div className="flex items-start group">
+                    <div className="p-3 bg-purple-100 rounded-lg mr-4 mt-1 group-hover:bg-purple-200 transition-colors">
+                      <MapPin className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <span className="font-semibold text-slate-800 leading-relaxed">Notcutt House, 36 Southwark Bridge Road,<br />London SE1 9EU</span>
                   </div>
-                  <div className="flex items-center">
-                    <Clock className="h-5 w-5 text-blue-600 mr-3" />
-                    <span>Monday to Saturday, 09:00-19:00</span>
+                  <div className="flex items-center group">
+                    <div className="p-3 bg-orange-100 rounded-lg mr-4 group-hover:bg-orange-200 transition-colors">
+                      <Clock className="h-6 w-6 text-orange-600" />
+                    </div>
+                    <span className="font-semibold text-slate-800">{t('workingHours')}</span>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Newsletter Signup */}
-              <Card>
+              <Card className="shadow-lg border-0 bg-gradient-to-br from-green-50 to-blue-50">
                 <CardHeader>
-                  <CardTitle>Stay Updated</CardTitle>
-                  <CardDescription>Subscribe to our newsletter for tax tips and updates</CardDescription>
+                  <CardTitle className="text-2xl text-slate-900">{t('stayUpdated')}</CardTitle>
+                  <CardDescription className="text-slate-600">{t('newsletterDesc')}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                  <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
                     <Input
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder={t('enterEmail')}
                       value={newsletterEmail}
                       onChange={(e) => setNewsletterEmail(e.target.value)}
                       required
+                      className="border-2 border-slate-200 focus:border-green-500"
                     />
-                    <Button type="submit" className="bg-green-600 hover:bg-green-700">
-                      Subscribe
+                    <Button type="submit" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 px-8">
+                      {t('subscribe')}
                     </Button>
                   </form>
                 </CardContent>
@@ -333,55 +370,59 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-12">
             <div className="col-span-2">
-              <h4 className="text-xl font-bold mb-4">Great Finance</h4>
-              <p className="text-gray-300 mb-4">
-                Professional tax and accounting services for British and Bulgarian clients. 
-                Your trusted partner for all financial matters.
+              <div className="flex items-center mb-6">
+                <div className="flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                  <TrendingUp className="h-6 w-6 mr-2" />
+                  <h4 className="text-2xl font-bold">Great Finance</h4>
+                </div>
+              </div>
+              <p className="text-slate-300 mb-8 leading-relaxed text-lg">
+                {t('footerDesc')}
               </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Facebook className="h-5 w-5" />
+              <div className="flex space-x-6">
+                <a href="#" className="text-slate-400 hover:text-white transition-colors duration-300 p-2 bg-slate-800 rounded-lg hover:bg-slate-700">
+                  <Facebook className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Instagram className="h-5 w-5" />
+                <a href="#" className="text-slate-400 hover:text-white transition-colors duration-300 p-2 bg-slate-800 rounded-lg hover:bg-slate-700">
+                  <Instagram className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Linkedin className="h-5 w-5" />
+                <a href="#" className="text-slate-400 hover:text-white transition-colors duration-300 p-2 bg-slate-800 rounded-lg hover:bg-slate-700">
+                  <Linkedin className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Twitter className="h-5 w-5" />
+                <a href="#" className="text-slate-400 hover:text-white transition-colors duration-300 p-2 bg-slate-800 rounded-lg hover:bg-slate-700">
+                  <Twitter className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                  <Youtube className="h-5 w-5" />
+                <a href="#" className="text-slate-400 hover:text-white transition-colors duration-300 p-2 bg-slate-800 rounded-lg hover:bg-slate-700">
+                  <Youtube className="h-6 w-6" />
                 </a>
               </div>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">Services</h5>
-              <ul className="space-y-2 text-gray-300">
-                <li>Self-Employed Tax Returns</li>
-                <li>Limited Companies</li>
-                <li>General Accounting</li>
-                <li>Self Assessment</li>
-                <li>Bookkeeping</li>
+              <h5 className="font-bold mb-6 text-xl">{t('services')}</h5>
+              <ul className="space-y-3 text-slate-300">
+                <li className="hover:text-white transition-colors cursor-pointer">{t('selfEmployed')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">{t('limitedCompanies')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">{t('generalAccounting')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">{t('selfAssessment')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">Bookkeeping</li>
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">Compliance</h5>
-              <ul className="space-y-2 text-gray-300">
-                <li>HMRC Regulated</li>
-                <li>Anti-Money Laundering</li>
-                <li>Data Protection</li>
-                <li>Professional Standards</li>
+              <h5 className="font-bold mb-6 text-xl">{t('compliance')}</h5>
+              <ul className="space-y-3 text-slate-300">
+                <li className="hover:text-white transition-colors cursor-pointer">{t('hmrcRegulated')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">{t('antiMoney')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">{t('dataProtection')}</li>
+                <li className="hover:text-white transition-colors cursor-pointer">{t('professionalStandards')}</li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; 2024 Great Finance. All rights reserved. | Regulated by HMRC</p>
+          <div className="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400">
+            <p>&copy; 2024 Great Finance. {t('allRights')}</p>
           </div>
         </div>
       </footer>
