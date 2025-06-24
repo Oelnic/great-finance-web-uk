@@ -118,7 +118,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <section id="home" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <div className="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-2 mb-8">
             <Shield className="h-5 w-5 text-green-400 mr-2" />
@@ -331,7 +331,9 @@ const Index = () => {
                     <div className="p-3 bg-purple-100 rounded-lg mr-4 mt-1 group-hover:bg-purple-200 transition-colors">
                       <MapPin className="h-6 w-6 text-purple-600" />
                     </div>
-                    <span className="font-semibold text-slate-800 leading-relaxed">Notcutt House, 36 Southwark Bridge Road,<br />London SE1 9EU</span>
+                    <span className="font-semibold text-slate-800 leading-relaxed">
+                      Notcutt House, 36 Southwark Bridge Road,<br />London SE1 9EU
+                    </span>
                   </div>
                   <div className="flex items-center group">
                     <div className="p-3 bg-orange-100 rounded-lg mr-4 group-hover:bg-orange-200 transition-colors">
